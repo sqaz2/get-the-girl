@@ -1,5 +1,6 @@
-const CACHE_NAME = 'gtg-coach-v1'
-const CORE_ASSETS = ['/', '/index.html', '/manifest.webmanifest']
+const CACHE_NAME = 'gtg-coach-v2'
+const BASE_URL = self.location.pathname.replace(/service-worker\.js$/, '') || './'
+const CORE_ASSETS = [`${BASE_URL}`, `${BASE_URL}index.html`, `${BASE_URL}manifest.webmanifest`]
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -30,7 +31,7 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache))
           return response
         })
-        .catch(() => caches.match('/'))
+        .catch(() => caches.match(`${BASE_URL}`))
     }),
   )
 })

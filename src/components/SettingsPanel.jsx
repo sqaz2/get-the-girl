@@ -5,21 +5,15 @@ export default function SettingsPanel({
   onOpenOnboarding,
   onSeedStarters,
   onClearLocal,
-  demoMode,
-  onToggleDemo,
+  onLoadSample,
   installPrompt,
   onInstall,
-  firebaseReady,
-  onSync,
 }) {
   return (
     <div>
       <div className="card">
         <h2>Settings & safeguards</h2>
-        <p>
-          Everything stays manual and consent-forward. Firebase keeps your data scoped to your anonymous
-          account; nothing about her is stored here.
-        </p>
+        <p>Everything stays manual, consent-forward, and on this device. Nothing is sent anywhere else.</p>
         <div className="helper-card">
           <strong>Current grounding</strong>
           <p className="note">Intent: {intake?.intentStatement || 'Add one in onboarding.'}</p>
@@ -33,6 +27,24 @@ export default function SettingsPanel({
           <button type="button" className="ghost" onClick={onSeedStarters}>
             Reseed INFJ starters
           </button>
+        </div>
+      </div>
+
+      <div className="card">
+        <h3>Workspace data</h3>
+        <div className="helper-card">
+          <p>
+            Drafts, starters, and reflections live in localStorage. Load the sample workspace for a guided
+            tour or clear storage to start fresh.
+          </p>
+          <div className="flex-row" style={{ gap: '0.75rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
+            <button type="button" className="ghost" onClick={onLoadSample}>
+              Load sample workspace
+            </button>
+            <button type="button" className="ghost" onClick={onClearLocal}>
+              Clear local storage
+            </button>
+          </div>
         </div>
       </div>
 
@@ -51,21 +63,6 @@ export default function SettingsPanel({
             Adds gentle warmth language while enforcing strict boundaries—no innuendo, no body commentary,
             and ethics checker becomes stricter.
           </p>
-        </div>
-        <div className="helper-card">
-          <label className="inline-field">
-            <input type="checkbox" checked={demoMode} onChange={(event) => onToggleDemo(event.target.checked)} />
-            Demo mode (local-only sample data)
-          </label>
-          <p>Preview the experience with seeded content. Toggle off to sync with your Firebase project.</p>
-        </div>
-        <div className="flex-row" style={{ gap: '0.75rem', marginTop: '0.75rem', flexWrap: 'wrap' }}>
-          <button type="button" className="ghost" onClick={onClearLocal}>
-            Clear local storage
-          </button>
-          <button type="button" className="ghost" onClick={onSync}>
-            Refresh from Firebase
-          </button>
         </div>
       </div>
 
@@ -93,11 +90,8 @@ export default function SettingsPanel({
 
       <div className="card">
         <h3>Status</h3>
-        <p className="note">Firebase configured: {firebaseReady ? 'Yes' : 'No (running in local/demo mode)'}</p>
-        <p className="note">
-          Anonymous auth only. No automation, scraping, or storing third-party personal data. Everything is
-          designed for manual, respectful outreach.
-        </p>
+        <p className="note">Storage: Local browser storage + offline cache.</p>
+        <p className="note">No automation, scraping, or third-party personal data. Everything stays manual.</p>
       </div>
     </div>
   )

@@ -90,8 +90,8 @@ export default function Onboarding({
     <div className="card">
       <h2>1-minute grounding</h2>
       <p>
-        Capture your anchors so every draft honors authenticity, boundaries, and her pace. The app
-        remembers this on-device and in your Firebase space.
+        Capture your anchors so every draft honors authenticity, boundaries, and her pace. Everything you
+        log stays on this device.
       </p>
       {errors.length ? (
         <div className="helper-card warning">
